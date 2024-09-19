@@ -13,13 +13,14 @@ def main():
 
     clock = pygame.time.Clock()
 
-    mennesker = Gruppe(100,screen,10)
+    mennesker = Gruppe(100,screen,10,10)
 
     mennesker.update()
 
     running = True
     while running:  
-        clock.tick()  
+        dt = clock.tick() / 1000
+        fps = clock.get_fps()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False  
@@ -27,7 +28,7 @@ def main():
         screen.fill((0, 128, 255))
 
 
-        mennesker.draw()
+        mennesker.draw(fps,dt)
 
         pygame.display.flip()
 main() 
