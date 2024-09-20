@@ -6,16 +6,24 @@ import random
 rects = []
 
 class Person():
-    def __init__(self,rask,screen,syg,smittet,død,mundbind,mundbindSurf):
+    def __init__(self,rask,screen,syg,smittet,død,immun,mundbind,mundbindSurf,mundbindSygSurf,mundbindImmunSurf,vaccineSurf,vaccine):
         self.__player_direction = pygame.math.Vector2(random.choice([-1,1]),random.choice([-1,1]))
         self.__lastIndex = []
         self.__rask = rask
         self.__død = død
+        self.__immun = immun
         self.__mundbindSurf = mundbindSurf
-        if mundbind == False:
-            self.__img = self.__rask
-        else:
+        self.__mundbindSygSurf = mundbindSygSurf
+        self.__mundbindImmunSurf = mundbindImmunSurf
+        self.__vaccineSurf = vaccineSurf
+        self.__erVaccineret = vaccine
+
+        if mundbind == True:
             self.__img = self.__mundbindSurf
+        elif self.__erVaccineret == True :
+            self.__img = self.__vaccineSurf
+        else:
+            self.__img = self.__rask
         self.__syg = syg
         self.__player_speed = random.uniform(40,60)
         self.screen = screen
@@ -55,16 +63,16 @@ class Person():
             self.__player_speed = 50
 
 
-    def update(self,mennesker,fps,dt):
+    def update(self,mennesker,dt):
         if self.__dead == False:
             self.__dt = dt
             self.__player_rect.center += self.__player_direction*self.__player_speed*self.__dt
             self.__mennesker = mennesker
             self.borderControl()
-            self.smitte()
-            self.__fps = fps
-            if self.__smittet == True:
-                self.raske()
+            if self.__erVaccineret == False:
+                self.smitte()
+                if self.__smittet == True:
+                    self.raske()
 
 
     def draw(self):
@@ -80,7 +88,7 @@ class Person():
                             continue
                         else:
                             if self.__mennesker[index].smittet:
-                                if self.__mundbind == True:
+                                if self.__mennesker[index].__mundbind == True:
                                     tempChance = self.__chance * 0.5
                                 else:
                                     tempChance = self.__chance
@@ -92,7 +100,7 @@ class Person():
         if self.__smittet == True and self.__mundbind == False:
             self.__img = self.__syg
         elif self.__smittet == True and self.__mundbind == True:
-            self.__img = self.__sygMundbind
+            self.__img = self.__mundbindSygSurf
     
     def raske(self):
         if self.__wait > 10000:
@@ -106,8 +114,8 @@ class Person():
                 self.__smittet = False
                 self.__chance *= 0.5
                 if self.__mundbind == False:
-                    self.__img = self.__rask
+                    self.__img = self.__immun
                 else:
-                    self.__img = self.__mundbindSurf
+                    self.__img = self.__mundbindImmunSurf
                 self.__wait = -1
         self.__wait += 1
