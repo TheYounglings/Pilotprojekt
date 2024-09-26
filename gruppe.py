@@ -4,16 +4,18 @@ from person import *
 from os.path import join
 from slider import *
 
+
 class Gruppe():
-    def __init__(self,antal,screen, antalSmittet,antalMundbind,antalVaccine):
+    def __init__(self,antal,screen, antalSmittet,antalMundbind,antalVaccine,smitteChance,dødChance):
         self.__mennesker = []
-
-
 
         self.__antal = antal
         self.__antalSmittet = antalSmittet
         self.__antalMundbind = antalMundbind
         self.__antalVaccine = antalVaccine
+
+        self.__smitteChance = smitteChance
+        self.__dødChance = dødChance
 
         self.screen = screen
         path = join('Normalstickman.png')
@@ -59,23 +61,23 @@ class Gruppe():
         m = 0
         v = 0
         while n < self.__antal:
-            i = n
-            while s < self.__antalSmittet:
-                i = Person(self.__rask,self.screen,self.__sick,True,self.__død,self.__immun,False,self.__mundbindSurf,self.__mundbindSygSurf,self.__mundbindImmunSurf,self.__vaccineSurf,False)  
-                self.__mennesker.append(i)
-                s += 1   
-            while m < self.__antalMundbind:
-                i = Person(self.__rask,self.screen,self.__sick,False,self.__død,self.__immun,True,self.__mundbindSurf,self.__mundbindSygSurf,self.__mundbindImmunSurf,self.__vaccineSurf,False)
-                self.__mennesker.append(i)
-                m += 1  
-            while v < self.__antalVaccine:
-                i = Person(self.__rask,self.screen,self.__sick,False,self.__død,self.__immun,False,self.__mundbindSurf,self.__mundbindSygSurf,self.__mundbindImmunSurf,self.__vaccineSurf,True)
-                self.__mennesker.append(i)
-                v += 1  
-
-            i = Person(self.__rask,self.screen,self.__sick,False,self.__død,self.__immun,False,self.__mundbindSurf,self.__mundbindSygSurf,self.__mundbindImmunSurf,self.__vaccineSurf,False)
+            i = Person(self.__rask,self.screen,self.__sick,False,self.__død,self.__immun,False,self.__mundbindSurf,self.__mundbindSygSurf,self.__mundbindImmunSurf,self.__vaccineSurf,False,self.__smitteChance,self.__dødChance)
             self.__mennesker.append(i)
             n += 1
+        while s < self.__antalSmittet:
+            i = Person(self.__rask,self.screen,self.__sick,True,self.__død,self.__immun,False,self.__mundbindSurf,self.__mundbindSygSurf,self.__mundbindImmunSurf,self.__vaccineSurf,False,self.__smitteChance,self.__dødChance)  
+            self.__mennesker.append(i)
+            s += 1   
+        while m < self.__antalMundbind:
+            i = Person(self.__rask,self.screen,self.__sick,False,self.__død,self.__immun,True,self.__mundbindSurf,self.__mundbindSygSurf,self.__mundbindImmunSurf,self.__vaccineSurf,False,self.__smitteChance,self.__dødChance)
+            self.__mennesker.append(i)
+            m += 1  
+        while v < self.__antalVaccine:
+            i = Person(self.__rask,self.screen,self.__sick,False,self.__død,self.__immun,False,self.__mundbindSurf,self.__mundbindSygSurf,self.__mundbindImmunSurf,self.__vaccineSurf,True,self.__smitteChance,self.__dødChance)
+            self.__mennesker.append(i)
+            v += 1  
+
+
         
 
 

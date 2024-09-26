@@ -1,14 +1,17 @@
 import pygame
 
-pygame.font.init() # you have to call this at the start, 
-                   # if you want to use this module.
-my_font = pygame.font.SysFont('Comic Sans MS', 15)
+
 
 class Score():
     def __init__(self,posX,posY,name,variable):
+        pygame.font.init() # you have to call this at the start, 
+            # if you want to use this module.
+        global my_font
+
+        my_font = pygame.font.SysFont('Comic Sans MS', 15)
         self.__posX = posX
         self.__posY = posY
-        self.__length = 120
+        self.__length = 140
         self.__height = 25
         self.__variable = variable
         self.__name = name
@@ -23,7 +26,7 @@ class Score():
         pygame.draw.rect(screen,"Black",self.__scoreBoxBorder)
 
         pygame.draw.rect(screen,"White",self.__scoreBox)
-
+        
         antal = str(self.__variable)
         self.__textSurface = my_font.render(f'{antal} {self.__name}', False, "darkgreen")
         screen.blit(self.__textSurface, (self.__posX+5,self.__posY))
