@@ -1,23 +1,22 @@
 import pygame
 
-otherMaks = 0
+
 
 pygame.font.init() # you have to call this at the start, 
                    # if you want to use this module.
 my_font = pygame.font.SysFont('Comic Sans MS', 10)
 
 class Slider():
-    def __init__(self,posX,posY,variable,screen,maks):
+    def __init__(self,posX,posY,name,screen,maks,variable=0):
         self.__posX = posX
         self.__posY = posY
         self.__length = 300
         self.__height = 25
         self.__variable = variable
+        self.__name = name
         self.__maks = maks
         self.__min = 0
         self.screen = screen
-
-        self.__readyButton = pygame.FRect(posX+self.__length+15,posY,self.__height,self.__height)
 
         self.__sliderBar = pygame.FRect(self.__posX,self.__posY,self.__length,self.__height)
 
@@ -47,8 +46,7 @@ class Slider():
     def draw(self):
         pygame.draw.rect(self.screen,"Black",self.__sliderBar) 
         pygame.draw.rect(self.screen,"Gray",self.__button) 
-        pygame.draw.rect(self.screen,"Red",self.__readyButton) 
 
         antal = str(round(self.__variable,0))
-        self.__textSurface = my_font.render('Ca. ' + antal, False, "red")
-        self.screen.blit(self.__textSurface, (self.__posX,self.__posY))
+        self.__textSurface = my_font.render(f'Ca. {antal} {self.__name}', False, "red")
+        self.screen.blit(self.__textSurface, (self.__posX,self.__posY+2))

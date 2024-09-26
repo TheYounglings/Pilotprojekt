@@ -3,6 +3,11 @@ from os.path import join
 from person import *
 from gruppe import *
 from slider import *
+from score import *
+
+pygame.font.init() # you have to call this at the start, 
+                   # if you want to use this module.
+my_font = pygame.font.SysFont('Comic Sans MS', 40)
 
 
 def main():
@@ -17,24 +22,30 @@ def main():
 
     sliders = []
 
-    antalSlider = Slider(10,10,0,screen,100)
 
-    smittetSlider = Slider(10,50,0,screen,100)
 
-    mundbindSlider = Slider(10,90,0,screen,100)
+    antalSlider = Slider(10,10,"raske",screen,100)
 
-    vaccineSlider = Slider(10,130,0,screen,100)
+    smittetSlider = Slider(10,50,"smittet",screen,100)
+
+    mundbindSlider = Slider(10,90,"mundbind",screen,100)
+
+    vaccineSlider = Slider(10,130,"vaccineret",screen,100)
 
     #sliders.append(antalSlider)
     sliders.append(smittetSlider)
     sliders.append(mundbindSlider)
     sliders.append(vaccineSlider)
 
+
+
     #mennesker = Gruppe(300,screen,10,10,10)
 
     #mennesker.update()
 
     startButton = pygame.FRect(WINDOW_WIDTH/2,WINDOW_HEIGHT/2,100,100)
+
+
 
     running = True
     while running:  
@@ -51,18 +62,19 @@ def main():
 
 
         if buttonPressed == False:
-            maks = antalSlider.variable
             antalSlider.draw()
             antalSlider.update()
             for slider in sliders:
                 slider.draw()
                 slider.update()
-                slider.maks = maks - otherMaks
+ 
 
             
 
             
             pygame.draw.rect(screen,"Black",startButton) 
+            startButtonText = my_font.render("start", False, "green")
+            screen.blit(startButtonText, (WINDOW_WIDTH/2,WINDOW_HEIGHT/2+15))
             if startButton.collidepoint(mouse_pos) and mouse[0]:
                 buttonPressed = True
         elif gruppe == False:
@@ -70,7 +82,11 @@ def main():
             mennesker.update()
             gruppe = True
         else:
+
             mennesker.draw(dt)
+            for scores in scoreBox:
+                scores.draw(screen)
+ 
 
 
         pygame.display.flip()

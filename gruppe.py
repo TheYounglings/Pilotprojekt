@@ -63,17 +63,14 @@ class Gruppe():
             while s < self.__antalSmittet:
                 i = Person(self.__rask,self.screen,self.__sick,True,self.__død,self.__immun,False,self.__mundbindSurf,self.__mundbindSygSurf,self.__mundbindImmunSurf,self.__vaccineSurf,False)  
                 self.__mennesker.append(i)
-                n += 1
                 s += 1   
             while m < self.__antalMundbind:
                 i = Person(self.__rask,self.screen,self.__sick,False,self.__død,self.__immun,True,self.__mundbindSurf,self.__mundbindSygSurf,self.__mundbindImmunSurf,self.__vaccineSurf,False)
                 self.__mennesker.append(i)
-                n += 1
                 m += 1  
             while v < self.__antalVaccine:
                 i = Person(self.__rask,self.screen,self.__sick,False,self.__død,self.__immun,False,self.__mundbindSurf,self.__mundbindSygSurf,self.__mundbindImmunSurf,self.__vaccineSurf,True)
                 self.__mennesker.append(i)
-                n += 1
                 v += 1  
 
             i = Person(self.__rask,self.screen,self.__sick,False,self.__død,self.__immun,False,self.__mundbindSurf,self.__mundbindSygSurf,self.__mundbindImmunSurf,self.__vaccineSurf,False)
