@@ -77,14 +77,14 @@ class Person():
 
 
     def update(self,mennesker,dt):
-        settings.raskeScoreBox.update(settings.raskeScore)
-        settings.smittetScoreBox.update(settings.smittetScore)
-        settings.mundbindScoreBox.update(settings.mundbindScore)
-        settings.vaccineretScoreBox.update(settings.vaccineScore)
-        settings.immunScoreBox.update(settings.imunScore)
-        settings.dødeScoreBox.update(settings.deadScore)
-        settings.smitteChanceScoreBox.update(self.__chance)
-        settings.dødeChanceScoreBox.update(self.__dødChance)
+        # settings.raskeScoreBox.update(settings.raskeScore)
+        # settings.smittetScoreBox.update(settings.smittetScore)
+        # settings.mundbindScoreBox.update(settings.mundbindScore)
+        # settings.vaccineretScoreBox.update(settings.vaccineScore)
+        # settings.immunScoreBox.update(settings.imunScore)
+        # settings.dødeScoreBox.update(settings.deadScore)
+        # settings.smitteChanceScoreBox.update(self.__chance)
+        # settings.dødeChanceScoreBox.update(self.__dødChance)
 
         if self.__dead == False:
             self.__dt = dt

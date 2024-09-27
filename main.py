@@ -44,9 +44,9 @@ def main():
 
     vaccineSlider = Slider(20,260,"vaccineret",screen,300)
 
-    smitteChanceSlider = Slider(20,340,"Smitte chance",screen,100)
+    smitteChanceSlider = Slider(20,340,"smitte chance",screen,100)
 
-    dødChanceSlider = Slider(20,420,"Døds chance",screen,100)
+    dødChanceSlider = Slider(20,420,"døds chance",screen,100)
 
     sliders.append(smittetSlider)
     sliders.append(mundbindSlider)
@@ -101,6 +101,15 @@ def main():
                 scores.draw(screen)
             pygame.draw.rect(screen,"Black",resetButtonBorder)
             pygame.draw.rect(screen,"White",resetButton) 
+            settings.raskeScoreBox.update(settings.raskeScore)
+            settings.smittetScoreBox.update(settings.smittetScore)
+            settings.mundbindScoreBox.update(settings.mundbindScore)
+            settings.vaccineretScoreBox.update(settings.vaccineScore)
+            settings.immunScoreBox.update(settings.imunScore)
+            settings.dødeScoreBox.update(settings.deadScore)
+
+            settings.smitteChanceScoreBox.update(smitteChanceSlider.variable) 
+            settings.dødeChanceScoreBox.update(dødChanceSlider.variable)    
 
             resetText = comicFontS.render("Genstart",False,"black")
             screen.blit(resetText,(10+2,WINDOW_HEIGHT-400))
